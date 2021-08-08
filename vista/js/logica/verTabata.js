@@ -94,11 +94,26 @@ var auxDescanso = descanso;
 var auxSeries = series;
 var auxRondas = rondas;
 
+const audio1 = new Audio("../vista/multimedia/preparate.mp3");
+// audio1.loop = false;
+const audio2 = new Audio("../vista/multimedia/ejercitate.mp3");
+// audio2.loop = false;
+const audio3 = new Audio("../vista/multimedia/descansa.mp3");
+ // audio3.loop = false;
+var aux1 =1;
+var aux2=1;
+var aux3=1;
+
 function pancarta() {
   if (auxRondas > 0) {
     
     if (auxPreparacion > 0) {
       document.querySelector("#tiempoDe").innerHTML = "Preparate: " + auxPreparacion-- + "seg";
+      if(aux1 ==1 ){
+        audio1.play();
+        aux1 = 0;
+      }
+    
       return;
     }
 
@@ -106,17 +121,27 @@ function pancarta() {
        document.getElementById("imagenejercicio").setAttribute("src", "../vista/img/" + imagenes[8-auxSeries] + ".jpg");
       if (auxActividad > 0) {
         document.querySelector("#tiempoDe").innerHTML = "Tiempo Actividad: " + auxActividad-- + "seg";
+        if(aux2 == 1){
+          audio2.play();
+          aux2 = 0;
+        }
         return;
       }
 
       if (auxDescanso > 0) {
         document.querySelector("#tiempoDe").innerHTML = "Tiempo descanso: " + auxDescanso-- + "seg";
         if(auxDescanso != 0){
+          if(aux3 == 1){
+            audio3.play();
+            aux3 = 0;
+          }
           return;
         }
       }
       auxActividad = actividad;
+      aux2 = 1;
       auxDescanso = descanso;
+      aux3 = 1;
       auxSeries--;
       if(auxSeries != 0){
         return;
@@ -126,6 +151,7 @@ function pancarta() {
     auxRondas--;
   }
   auxPreparacion = preparacion;
+  aux1 = 1;
   return;
 }
 
