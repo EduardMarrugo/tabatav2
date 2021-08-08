@@ -1,8 +1,8 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar Tabata</h5>
+                <h1 class="modal-title display-5 fw-bold" id="editarModalLabel">Editar Tabata</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -27,7 +27,7 @@
                         placeholder="Tiempo de descanso">
 
                     <label for="numSeries" class="sr-only mt-2">numSeries</label>
-                    <input name="numSeries" value="8" readonly type="number" id="numSeries" class="form-control "
+                    <input name="numSeries" value="4" readonly type="number" id="numSeries" class="form-control "
                         placeholder="Cantidad de series">
 
                     <label for="numRondas" class="sr-only mt-2">numRondas</label>

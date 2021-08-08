@@ -1,11 +1,13 @@
-<div class="modal fade" id="aggTabataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="AgregarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="AgregarModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="aggTabataModal">Editar Tabata</h5>
+                <h1 class="modal-title display-5 fw-bold" id="AgregarModalLabel">Agregar Tabata</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                
                 <form class="form-signin" method="post" action="../controlador/accion/act_guardarTabata.php">
 
                     <input name="nombreTabata" type="text" id="nombreTabata" class="form-control"
@@ -20,7 +22,7 @@
                     <input name="tDescanso" type="number" min="1" max="60" id="tDescanso" class="form-control"
                         placeholder="Tiempo de descanso">
 
-                    <input name="numSeries" type="number" value="8" readonly id="numSeries" class="form-control"
+                    <input name="numSeries" type="number" value="4" readonly id="numSeries" class="form-control"
                         placeholder="Cantidad de series">
 
                     <input name="numRondas" type="number" min="1" max="20" id="numRondas" class="form-control"
@@ -36,7 +38,10 @@
 
                 </form>
             </div>
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
         </div>
     </div>
 </div>

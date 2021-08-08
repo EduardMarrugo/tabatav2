@@ -1,9 +1,9 @@
 
 $(document).ready(function () {
-    $('#tabla').load('../componentes/tabla.php');
     $('#form_edit').load('../componentes/form_editarTabata.php');
     $('#form_agg').load('../componentes/form_aggTabata.php');
-    mostrarTabatasGuardadas()
+    $('#tabla').load('../componentes/tabla.php');
+    mostrarTabatasGuardadas();
 })
 
 function mostrarTabatasGuardadas() {
@@ -39,7 +39,7 @@ function mostrarTabatasGuardadas() {
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href='tabata_selec.php?nombre=`+ tabatas[i].nombreTabata + `&preparacion=` + tabatas[i].tPreparacion + `&actividad=` + tabatas[i].tActividad + `&descanso=` + tabatas[i].tDescanso + `&series=` + tabatas[i].numSeries + `&rondas=` + tabatas[i].numRondas + `&idTabata=` + tabatas[i].idTabata + `'>Iniciar</a></li>
 
-                    <li><a class="edit dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">
+                    <li><a class="edit dropdown-item" data-bs-toggle="modal" data-bs-target="#editarModal" href="#">
                     Editar
                     </a></li>
                     
