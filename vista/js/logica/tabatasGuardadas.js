@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    // Modals
+  // Modals
   $("#form_edit").load("../componentes/form_editarTabata.php");
   $("#form_agg").load("../componentes/form_aggTabata.php");
-// $("#tabla").load("../componentes/tabla.php");
+  // $("#tabla").load("../componentes/tabla.php");
 
-    //TablaConfig
+  //TablaConfig
   tablaPersonas = $("#tablaPersonas").DataTable({
     columnDefs: [
       {
@@ -55,26 +55,18 @@ $(document).ready(function () {
   });
 
   mostrarTabatasGuardadas();
-
- 
- 
 });
 
 function mostrarTabatasGuardadas() {
   var http = new XMLHttpRequest();
   var url = "/tabata/controlador/accion/act_verTabatasGuardadas.php";
 
-  http.open("POST", url, true);
+  $.ajax({
+    type: "POST",
+    url: url,
+    success: function (data) {
+      let tabatas = JSON.parse(data);
 
-  //Send the proper header information along with the request
-  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-  http.onreadystatechange = function () {
-    //Call a function when the state changes.
-    if (http.readyState == 4 && http.status == 200) {
-      var tabatas = JSON.parse(this.responseText);
-      console.log(tabatas);
-      //
       for (let value of tabatas) {
         tablaPersonas.row
           .add([
@@ -88,9 +80,9 @@ function mostrarTabatasGuardadas() {
           ])
           .draw();
       }
-
       $(".editarTabata").click(function (e) {
-        var attrs = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+        var attrs =
+          e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
         console.log(attrs);
         console.log(attrs.childNodes[5].innerHTML);
         $("#idTabata").val(attrs.childNodes[0].innerHTML);
@@ -101,9 +93,10 @@ function mostrarTabatasGuardadas() {
         $("#numSeries").val(attrs.childNodes[5].innerHTML);
         $("#numRondas").val(attrs.childNodes[6].innerHTML);
       });
-    
+
       $(".iniciarTabata").click(function (e) {
-        var attrs = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+        var attrs =
+          e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
         console.log(attrs);
         let id = attrs.childNodes[0].innerHTML;
         let nombre = attrs.childNodes[1].innerHTML;
@@ -112,7 +105,7 @@ function mostrarTabatasGuardadas() {
         let tdesc = attrs.childNodes[4].innerHTML;
         let nums = attrs.childNodes[5].innerHTML;
         let numr = attrs.childNodes[6].innerHTML;
-    
+
         location.href =
           "tabata_selec.php?nombre=" +
           nombre +
@@ -129,65 +122,81 @@ function mostrarTabatasGuardadas() {
           "&idTabata=" +
           id;
       });
-    
-    
-    }
-  };
-  http.send();
+    },
+  });
+
+ 
 }
 
-// mostrarTabatasGuardadas();
+/*
 
-// <button class="btn btn-primary"> Eliminar </button>
-// <a class="dropdown-item" href='tabata_selec.php?nombre=`+ tabatas[i].nombreTabata + `&preparacion=` + tabatas[i].tPreparacion + `&actividad=` + tabatas[i].tActividad + `&descanso=` + tabatas[i].tDescanso + `&series=` + tabatas[i].numSeries + `&rondas=` + tabatas[i].numRondas + `&idTabata=` + tabatas[i].idTabata + `'> <button class="btn btn-primary"> Ver </button> </a>
+ //   http.open("POST", url, true);
 
-//aegrbgsdh
+  //   //Send the proper header information along with the request
+  //   http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-/* <div class="dropdown">
-<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fas fa-chevron-down"></i>
-</button>
-<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-<li><a class="dropdown-item" href='tabata_selec.php?nombre=`+ tabatas[i].nombreTabata + `&preparacion=` + tabatas[i].tPreparacion + `&actividad=` + tabatas[i].tActividad + `&descanso=` + tabatas[i].tDescanso + `&series=` + tabatas[i].numSeries + `&rondas=` + tabatas[i].numRondas + `&idTabata=` + tabatas[i].idTabata + `'>Iniciar</a></li>
+  //   http.onreadystatechange = function () {
+  //     //Call a function when the state changes.
+  //     if (http.readyState == 4 && http.status == 200) {
+  //       var tabatas = JSON.parse(this.responseText);
+  //       console.log(tabatas);
+  //       //
+  //       for (let value of tabatas) {
+  //         tablaPersonas.row
+  //           .add([
+  //             value.idTabata,
+  //             value.nombreTabata,
+  //             value.tPreparacion,
+  //             value.tActividad,
+  //             value.tDescanso,
+  //             value.numSeries,
+  //             value.numRondas,
+  //           ])
+  //           .draw();
+  //       }
 
-<li><a class="editarTabata dropdown-item" data-bs-toggle="modal" data-bs-target="#editarModal" href="#">
-Editar
-</a></li>
+  //       $(".editarTabata").click(function (e) {
+  //         var attrs = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+  //         console.log(attrs);
+  //         console.log(attrs.childNodes[5].innerHTML);
+  //         $("#idTabata").val(attrs.childNodes[0].innerHTML);
+  //         $("#nombreTabata").val(attrs.childNodes[1].innerHTML);
+  //         $("#tPreparacion").val(attrs.childNodes[2].innerHTML);
+  //         $("#tActividad").val(attrs.childNodes[3].innerHTML);
+  //         $("#tDescanso").val(attrs.childNodes[4].innerHTML);
+  //         $("#numSeries").val(attrs.childNodes[5].innerHTML);
+  //         $("#numRondas").val(attrs.childNodes[6].innerHTML);
+  //       });
 
-<li><a class="dropdown-item" href="#">Eliminar</a></li>
-</ul>
-</div> */
+  //       $(".iniciarTabata").click(function (e) {
+  //         var attrs = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+  //         console.log(attrs);
+  //         let id = attrs.childNodes[0].innerHTML;
+  //         let nombre = attrs.childNodes[1].innerHTML;
+  //         let tpre = attrs.childNodes[2].innerHTML;
+  //         let tact = attrs.childNodes[3].innerHTML;
+  //         let tdesc = attrs.childNodes[4].innerHTML;
+  //         let nums = attrs.childNodes[5].innerHTML;
+  //         let numr = attrs.childNodes[6].innerHTML;
 
-//INICIARR
-{
-  /* <a class="dropdown-item" href='tabata_selec.php?nombre=`+ tabatas[i].nombreTabata + `&preparacion=` + tabatas[i].tPreparacion + `&actividad=` + tabatas[i].tActividad + `&descanso=` + tabatas[i].tDescanso + `&series=` + tabatas[i].numSeries + `&rondas=` + tabatas[i].numRondas + `&idTabata=` + tabatas[i].idTabata + `'> */
-}
+  //         location.href =
+  //           "tabata_selec.php?nombre=" +
+  //           nombre +
+  //           "&preparacion=" +
+  //           tpre +
+  //           "&actividad=" +
+  //           tact +
+  //           "&descanso=" +
+  //           tdesc +
+  //           "&series=" +
+  //           nums +
+  //           "&rondas=" +
+  //           numr +
+  //           "&idTabata=" +
+  //           id;
+  //       });
 
-///Contenido tabla
-
-//     document.getElementById('tabloide').innerHTML += `<tr>
-//     <td>`+ tabatas[i].idTabata+ `</td>
-//     <td>`+ tabatas[i].nombreTabata + `</td>
-//     <td>`+ tabatas[i].tPreparacion + `</td>
-//     <td>`+ tabatas[i].tActividad + `</td>
-//     <td>`+ tabatas[i].tDescanso + `</td>
-//     <td>`+ tabatas[i].numSeries + `</td>
-//     <td>`+ tabatas[i].numRondas + `</td>
-//     <td>
-//     <div class="dropdown">
-//     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-//         <i class="fas fa-chevron-down"></i>
-//     </button>
-//     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-//     <li><a class="dropdown-item" href='tabata_selec.php?nombre=`+ tabatas[i].nombreTabata + `&preparacion=` + tabatas[i].tPreparacion + `&actividad=` + tabatas[i].tActividad + `&descanso=` + tabatas[i].tDescanso + `&series=` + tabatas[i].numSeries + `&rondas=` + tabatas[i].numRondas + `&idTabata=` + tabatas[i].idTabata + `'>Iniciar</a></li>
-
-//     <li><a class="editarTabata dropdown-item" data-bs-toggle="modal" data-bs-target="#editarModal" href="#">
-//     Editar
-//     </a></li>
-
-//     <li><a class="dropdown-item" href="#">Eliminar</a></li>
-//     </ul>
-//     </div>
-//     </td>
-
-//   </tr>`
+  //     }
+  //   };
+  //   http.send();
+*/

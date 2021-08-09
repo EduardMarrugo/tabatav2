@@ -1,14 +1,19 @@
 $(document).ready(() => {
   verTabatasGuardadas();
-  document.querySelector("#TT").innerHTML = secondsToString(tiempoTotal);
   document.querySelector("#Title").innerHTML = 'Tabata '+ nombre;
+  document.querySelector("#tiempoT").innerHTML = secondsToString(tiempoTotal);
+  document.querySelector("#TT").innerHTML = secondsToString(tiempoTotal);
+  document.getElementById("imagenejercicio").setAttribute("src", "../vista/img/animo.gif");
+  
+  
+  
 });
 
 let url_string = window.location.href;
 let url = new URL(url_string);
 console.log(url_string);
 
-var imagenes = ["imgbrazo", "imgbrazo1", "imgbrazo2", "imgbrazo3", "imgpierna", "imgpierna2", "imgpierna3", "imgabdomen"];
+var imagenes = ["bicepflexiones", "fondotriceps", "mancuernabicep", "sentadillas"];
 
 
 let nombre = url.searchParams.get("nombre");
@@ -34,26 +39,16 @@ console.log(tiempoRonda);
 console.log(tiempoTotal);
 
 function verTabatasGuardadas() {
-  document.getElementById("list-group-selec").innerHTML +=
-    `<tr>
-    <td>` +
-    preparacion +
-    `</td>
-    <td>` +
-    actividad +
-    `</td>
-    <td>` +
-    descanso +
-    `</td>
-    <td>` +
-    series +
-    `</td>
-    <td>` +
-    rondas +
-    `</td>
-    <td>` +
-    secondsToString(tiempoTotal) +
-    `</td></tr>`;
+  document.querySelector(".list-group").innerHTML = `
+    <li class="list-group-item"> Preparacion: ` + preparacion +` seg </li>
+    <li class="list-group-item"> Actividad: ` + actividad +` seg </li>
+    <li class="list-group-item"> Descanso: ` + descanso +` seg </li>
+    <li class="list-group-item"> #Series: ` + series +` </li>
+    <li class="list-group-item"> #Rondas: ` + rondas +` </li>
+  `
+  
+
+   
 }
 
 function secondsToString(seconds) {
@@ -118,10 +113,11 @@ function pancarta() {
     }
 
     if (auxSeries > 0) {
-       document.getElementById("imagenejercicio").setAttribute("src", "../vista/img/" + imagenes[8-auxSeries] + ".jpg");
+      // document.getElementById("imagenejercicio").setAttribute("src", "../vista/img/" + imagenes[4-auxSeries] + ".gif");
       if (auxActividad > 0) {
         document.querySelector("#tiempoDe").innerHTML = "Tiempo Actividad: " + auxActividad-- + "seg";
         if(aux2 == 1){
+          document.getElementById("imagenejercicio").setAttribute("src", "../vista/img/" + imagenes[4-auxSeries] + ".gif");
           audio2.play();
           aux2 = 0;
         }
@@ -132,6 +128,7 @@ function pancarta() {
         document.querySelector("#tiempoDe").innerHTML = "Tiempo descanso: " + auxDescanso-- + "seg";
         if(auxDescanso != 0){
           if(aux3 == 1){
+            document.getElementById("imagenejercicio").setAttribute("src", "../vista/img/descanso.jpg");
             audio3.play();
             aux3 = 0;
           }
