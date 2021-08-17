@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12">
-        <table class="table table-hover table-responsive" style="width:100%">
+        <table class="table table-hover table-responsive" style="width:100%; box-shadow: 2px 2px 15px 2px #ccc;">
             <thead class="thead-green">
                 <tr>
                     <th>id</th>

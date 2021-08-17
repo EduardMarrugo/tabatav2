@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-grid.min.css">
 	<link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<link rel="stylesheet" href="css/EstiloLogin.css">
 	<meta name="google-signin-client_id" content="363480282160-60k7tnl57l0ivpu603rqbuv1i8tjrg6c.apps.googleusercontent.com">
 </head>
@@ -29,11 +30,12 @@
 		<input name="password" type="password" id="password" class="form-control" placeholder="Contraseña">
 		<div class="checkbox mb-3">
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">
+		<button id="sesion" class="btn btn-lg btn-primary btn-block" type="submit">
 			<h8>Iniciar Sesión</h8>
 		</button>
 		<!-- <div style="width:300px; height:48px; margin: 10px 0;" class="g-signin2" data-onsuccess="onSignIn"></div> -->
 		<input type="button" class="btn btn-lg btn-secondary btn-block" onclick="location.href = 'signup.php'" value="Registrar">
+		<input type="button" class="btn btn-lg btn-secondary btn-block" onclick="location.href = 'olvidarContra.php'" value="Olvide mi Contraseña">
 
 	</form>
 

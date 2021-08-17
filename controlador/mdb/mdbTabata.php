@@ -23,3 +23,10 @@
         $dao = new TabataDAO();
         $dao->editarTabata($tabata);
     }
+
+    function eliminarTabata($idTabata)
+    {
+        $dao = new TabataDAO();
+        $dao->eliminarTabata($idTabata);
+    }
+?>

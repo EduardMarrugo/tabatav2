@@ -1,64 +1,14 @@
 $(document).ready(function () {
   // Modals
+  $("#tabla").load("../componentes/tabla.php");
   $("#form_edit").load("../componentes/form_editarTabata.php");
   $("#form_agg").load("../componentes/form_aggTabata.php");
-  // $("#tabla").load("../componentes/tabla.php");
+  $("#form_elim").load("../componentes/form_eliminarTabata.php");
 
-  //TablaConfig
-  tablaPersonas = $("#tablaPersonas").DataTable({
-    columnDefs: [
-      {
-        targets: -1,
-        data: null,
-        defaultContent: `
-         <div class="dropdown text-center">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li >                  
-                    <a class="dropdown-item iniciarTabata" href="#" >
-                        Iniciar
-                    </a>                   
-                </li>
-                <li>
-                    <a class="editarTabata dropdown-item" data-bs-toggle="modal" data-bs-target="#editarModal" href="#">
-                        Editar
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        Eliminar
-                    </a>
-                </li>
-             </ul>
-        </div> 
-         `,
-      },
-    ],
-
-    language: {
-      lengthMenu: "Mostrar _MENU_ registros",
-      zeroRecords: "No se encontraron resultados",
-      info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-      infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
-      infoFiltered: "(filtrado de un total de _MAX_ registros)",
-      sSearch: "Buscar:",
-      oPaginate: {
-        sFirst: "Primero",
-        sLast: "Último",
-        sNext: "Siguiente",
-        sPrevious: "Anterior",
-      },
-      sProcessing: "Procesando...",
-    },
-  });
-
-  mostrarTabatasGuardadas();
+  setTimeout(mostrarTabatasGuardadas, 1000);
 });
 
 function mostrarTabatasGuardadas() {
-  var http = new XMLHttpRequest();
   var url = "/tabata/controlador/accion/act_verTabatasGuardadas.php";
 
   $.ajax({
@@ -66,32 +16,104 @@ function mostrarTabatasGuardadas() {
     url: url,
     success: function (data) {
       let tabatas = JSON.parse(data);
-
-      for (let value of tabatas) {
-        tablaPersonas.row
-          .add([
-            value.idTabata,
-            value.nombreTabata,
-            value.tPreparacion,
-            value.tActividad,
-            value.tDescanso,
-            value.numSeries,
-            value.numRondas,
-          ])
-          .draw();
+      console.log(data);
+      if (tabatas.length == 0) {
+        document.getElementById("vacio").innerHTML += `
+        <div class="container px-lg-5">
+            <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+                <div class="m-4 m-lg-5">
+                    <h1 class="display-5 fw-bold">Lista Vacia</h1>
+                    
+                </div>
+            </div>
+        </div>`;
       }
+      for (let value of tabatas) {
+        document.getElementById("list-group").innerHTML +=
+          `<tr>
+              <td>` +
+          value.idTabata +
+          `</td>
+              <td>` +
+          value.nombreTabata +
+          `</td>
+              <td>` +
+          value.tPreparacion +
+          `</td>
+              <td>` +
+          value.tActividad +
+          `</td>
+              <td>` +
+          value.tDescanso +
+          `</td>
+              <td>` +
+          value.numSeries +
+          `</td>
+              <td>` +
+          value.numRondas +
+          `</td>
+              <td>
+                  <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <i class="fas fa-chevron-down"></i>
+                      </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href='tabata_selec.php?&nombre=` +
+          value.nombreTabata +
+          `&preparacion=` +
+          value.tPreparacion +
+          `&actividad=` +
+          value.tActividad +
+          `&descanso=` +
+          value.tDescanso +
+          `&series=` +
+          value.numSeries +
+          `&rondas=` +
+          value.numRondas +
+          `&idTabata=` +
+          value.idTabata +
+          `'>Ver</a></li>
+                  <li><a class="editarTabata dropdown-item" data-bs-toggle="modal" data-bs-target="#editarModal" href="#">
+                  Editar
+                  </a></li>
+                  
+                  <li><a class="eliminarTabata dropdown-item" data-bs-toggle="modal" data-bs-target="#eliminarModal" href="#">Eliminar</a></li>
+                  </ul>
+                  </div>
+              </td>
+              
+              
+          </tr>`;
+       
+      }
+
       $(".editarTabata").click(function (e) {
+        // tablaPersonas.row(':eq(0)', { page: 'current' }).select();
         var attrs =
           e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
         console.log(attrs);
         console.log(attrs.childNodes[5].innerHTML);
-        $("#idTabata").val(attrs.childNodes[0].innerHTML);
-        $("#nombreTabata").val(attrs.childNodes[1].innerHTML);
-        $("#tPreparacion").val(attrs.childNodes[2].innerHTML);
-        $("#tActividad").val(attrs.childNodes[3].innerHTML);
-        $("#tDescanso").val(attrs.childNodes[4].innerHTML);
-        $("#numSeries").val(attrs.childNodes[5].innerHTML);
-        $("#numRondas").val(attrs.childNodes[6].innerHTML);
+        $("#idTabata").val(attrs.childNodes[1].innerHTML);
+        $("#nombreTabata").val(attrs.childNodes[3].innerHTML);
+        $("#tPreparacion").val(attrs.childNodes[5].innerHTML);
+        $("#tActividad").val(attrs.childNodes[7].innerHTML);
+        $("#tDescanso").val(attrs.childNodes[9].innerHTML);
+        $("#numSeries").val(attrs.childNodes[11].innerHTML);
+        $("#numRondas").val(attrs.childNodes[13].innerHTML);
+      });
+
+      $(".eliminarTabata").click(function (e) {
+        var attrs =
+          e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+        console.log(attrs);
+        console.log(attrs.childNodes[5].innerHTML);
+        $("#idTabataE").val(attrs.childNodes[1].innerHTML);
+        $("#nombreTabataE").val(attrs.childNodes[3].innerHTML);
+        $("#tPreparacionE").val(attrs.childNodes[5].innerHTML);
+        $("#tActividadE").val(attrs.childNodes[7].innerHTML);
+        $("#tDescansoE").val(attrs.childNodes[9].innerHTML);
+        $("#numSeriesE").val(attrs.childNodes[11].innerHTML);
+        $("#numRondasE").val(attrs.childNodes[13].innerHTML);
       });
 
       $(".iniciarTabata").click(function (e) {
@@ -124,8 +146,6 @@ function mostrarTabatasGuardadas() {
       });
     },
   });
-
- 
 }
 
 /*

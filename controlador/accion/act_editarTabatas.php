@@ -12,6 +12,8 @@ $series = $_POST['numSeries'];
 $rondas = $_POST['numRondas'];
 $idUsuario = $_SESSION["ID_USUARIO"];
 
+ echo "<script>console.log('Debug Objects: " . $_POST['nombreTabata'] . "' );</script>";
+
 $tabata = new Tabata($idTabata, $nombreTabata, $preparacion, $actividad, $descanso, $series, $rondas, $idUsuario);
 editarTabata($tabata);
 

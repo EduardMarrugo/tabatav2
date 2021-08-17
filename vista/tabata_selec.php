@@ -12,7 +12,7 @@
     <script src="js/librerias/jquery-3.3.1.min.js"></script>
 </head>
 
-<body>
+<body >
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-lg-5">
@@ -36,7 +36,7 @@
         <div class="container ">
             <div class="rounded-3 text-center">
                 <div class="row">
-                    <div class="col">
+                    <!-- <div class="col">
                         <div class="card" style="margin-top: 100px; margin-bottom: 100px; width: 24rem">
 
                             <div class="card-body">
@@ -59,10 +59,10 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col">
-                        <div class="card" style=" width: 40rem;">
-                            <img src="" alt="" id="imagenejercicio" class="card-img-top img ">
+                        <div class="card" style=" width: 70rem;">
+                            <img src="" alt="" id="imagenejercicio" class="card-img-top img " style="width: 450px; margin: auto">
 
                             <div class="card-body">
 
@@ -76,8 +76,9 @@
                                     card's content.</p> -->
 
                                 <center>
-                                    <h1 class="display-5 fw-bold" id="tiempoDe">JUST DO IT!!</h1>
-                                    <h1 class="display-5 fw-bold" id="TT"></h1>
+                                    <h1 class="display-5 fw-bold" id="description" >Preparate!!</h1>
+                                    <h1 class="display-6 fw-bold" id="tiempoDe">JUST DO IT!!</h1>
+                                    <h1 class="display-6 fw-bold" id="TT"></h1>
                                 </center>
 
                                 <center>
@@ -91,7 +92,12 @@
                                             Pausar
                                         </h4>
                                     </a>
-                                    <a class="btn button" href="../vista/tabatas.php">
+                                    <a href="#" class="btn button">
+                                        <h4 id="reiniciarTiempo">
+                                            Reiniciar
+                                        </h4>
+                                    </a>
+                                    <a class="btn button" id="verEjercicios">
                                         <h4>
                                             Ejercicios
                                         </h4>
@@ -148,12 +154,14 @@
 card-title {
     font-family: 'Open Sans', sans-serif;
 }
-
+body{
+    background-image: url('img/fondotodo.jpg');  
+}
 .card {
     margin: auto;
     width: 30rem;
-    border-top-right-radius: 10px 10px;
-    border-top-left-radius: 50px 50px;
+    /* border-top-right-radius: 10px 10px;
+    border-top-left-radius: 50px 50px; */
     border-bottom-left-radius: 5px 5px;
     border-bottom-right-radius: 50px 50px;
     box-shadow: 2px 2px 15px 2px #ccc;
@@ -162,7 +170,7 @@ card-title {
 .img {
     border-top-right-radius: 5px 5px;
     border-top-left-radius: 50px 50px;
-   
+
 }
 
 .button {

@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-signin" method="post" action="../controlador/accion/act_editarTabatas.php">
+                <form class="form-signin" method="post" action="../controlador/accion/act_editarTabatas.php" id="formEditEliminar">
                     <label for="idTabata" class="sr-only">idTabata</label>
                     <input name="idTabata" type="number" required id="idTabata" readonly class="form-control" autofocus>
 
@@ -37,7 +37,7 @@
                     <div class="checkbox mb-3">
                     </div>
 
-                    <button class="btn btn-lg btn-primary" type="submit">
+                    <button class="btn btn-lg btn-primary" id="btnGuardar">
                         Guardar
                     </button>
                     <button type="button" class="btn btn-lg btn-secondary btn-block" data-bs-dismiss="modal">

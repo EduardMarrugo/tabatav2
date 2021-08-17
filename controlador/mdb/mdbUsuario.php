@@ -15,6 +15,18 @@ function autenticarUsuario($correo, $password)
     return $usuario;
 }
 
+function recuperarConCorreo($correo)
+{
+
+    $dao = new UsuarioDAO();
+
+
+    $usuario = $dao->recuperarConCorreo($correo);
+
+  
+    return $usuario;
+}
+
 function registrarUsuario(Usuario $usuario)
 {
 

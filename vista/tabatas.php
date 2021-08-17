@@ -55,8 +55,8 @@
 
                 </div>
             </div>
-            <div class="table-responsive">
-                <table id="tablaPersonas" class="table table-striped table-bordered table-condensed" style="width:100%">
+            <!-- <div class="table-responsive">
+                <table id="tablaPersonas" class="table table-striped table-bordered table-condensed display" style="width:100%">
                     <thead class="text-center">
                         <tr>
                             <th>id</th>
@@ -66,15 +66,16 @@
                             <th>Descanso</th>
                             <th>Series</th>
                             <th>Rondas</th>
-                            <th>Opciones</th>
+                            <th class="text-center">Opciones</th>
                         </tr>
                     </thead>
                     <tbody id="tabloide">
 
                     </tbody>
                 </table>
-            </div>
+            </div> -->
             <div id="tabla"></div>
+            <div id="vacio"></div>
 
         </div>
 
@@ -82,6 +83,8 @@
         <div id="form_edit"></div>
 
         <div id="form_agg"></div>
+
+        <div id="form_elim"></div>
 
 
     </header>

@@ -52,6 +52,37 @@ class UsuarioDAO
         return $usuario;
     }
 
+    public function recuperarConCorreo($correo){
+        $data_source = new DataSource();
+
+        $data_table = $data_source->ejecutarConsulta("SELECT * FROM usuario WHERE correo = :correo", array(':correo' => $correo));
+        
+        $usuario = null;
+
+        if (count($data_table) == 1) {
+
+            //Se guarda la informacion del usuario en un objeto de tipo Usuario
+            foreach ($data_table as $indice => $valor) {
+                //Los nombres de los campos corresponden a los nombres que tienen en la 
+                //base de datos, por ejemplo: id, nombre, correo, password, etc.
+                $usuario = new Usuario(
+                    $data_table[$indice]["id"],
+                    $data_table[$indice]["nombre"],
+                    $data_table[$indice]["correo"],
+                    $data_table[$indice]["password"],
+                    $data_table[$indice]["telefono"],
+                    $data_table[$indice]["fechanac"],
+                    $data_table[$indice]["sexo"],
+                    $data_table[$indice]["pesokg"],
+                    $data_table[$indice]["administrador"]
+                );
+            }
+        }
+        //se retorna el objeto usuario, retorna null en el caso de que no encuentre el usuario
+        //en la base de datos 
+        return $usuario;
+    }
+
 
     public function registrarUsuario(Usuario $usuario)
     {

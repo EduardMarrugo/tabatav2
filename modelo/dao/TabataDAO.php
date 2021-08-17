@@ -70,4 +70,20 @@ class TabataDAO
         return $resultado;
     }
 
+    public function eliminarTabata($idTabata)
+    {
+        $data_source = new DataSource();
+
+        $stmt1 = "DELETE FROM tabata WHERE id = :idTabata";
+
+        $resultado = $data_source->ejecutarActualizacion(
+            $stmt1,
+            array(
+                ':idTabata' => $idTabata
+            )
+        );
+
+        return $resultado;
+    }
+
 }

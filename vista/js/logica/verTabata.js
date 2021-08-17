@@ -1,13 +1,33 @@
+
+let objetoEjercicio = {}
+let arrayEjerciciosPorSeries = []
+
 $(document).ready(() => {
-  verTabatasGuardadas();
-  document.querySelector("#Title").innerHTML = 'Tabata '+ nombre;
-  document.querySelector("#tiempoT").innerHTML = secondsToString(tiempoTotal);
+  // verTabatasGuardadas();
+  // document.querySelector("#Title").innerHTML = 'Tabata '+ nombre;
+  //document.querySelector("#tiempoT").innerHTML = secondsToString(tiempoTotal);
   document.querySelector("#TT").innerHTML = secondsToString(tiempoTotal);
   document.getElementById("imagenejercicio").setAttribute("src", "../vista/img/animo.gif");
-  
-  
+
+  $.ajax({
+    type: "POST",
+    url: "../controlador/accion/act_verEjerciciosGuardados.php",
+    success: function (data) {
+      let array = JSON.parse(data);
+      array.forEach(function (object) {   
+        if(object.idTipoEjercicio == 4){
+          
+          objetoEjercicio = { nombreEjercicio: object.nombreEjercicio, nombreImagen: object.imagen, idEjercicio: object.idEjercicio, description: object.descripcion }
+          arrayEjerciciosPorSeries.push(objetoEjercicio)
+        }
+      });
+      console.log(arrayEjerciciosPorSeries)
+    },
+  });
   
 });
+
+
 
 let url_string = window.location.href;
 let url = new URL(url_string);
@@ -72,6 +92,10 @@ $("#pararTiempo").click(() => {
   document.querySelector("#iniciarTiempo").innerHTML = "Reanudar";
 });
 
+$("#reiniciarTiempo").click(() => {
+  location.reload();
+});
+
 function controlTiempo() {
   if (tiempoTotal >= 1) {
     tiempoTotal--;
@@ -81,7 +105,7 @@ function controlTiempo() {
  
 
   document.querySelector("#TT").innerHTML = secondsToString(tiempoTotal);
-}
+};
 
 var auxPreparacion = preparacion;
 var auxActividad = actividad;
@@ -117,7 +141,8 @@ function pancarta() {
       if (auxActividad > 0) {
         document.querySelector("#tiempoDe").innerHTML = "Tiempo Actividad: " + auxActividad-- + "seg";
         if(aux2 == 1){
-          document.getElementById("imagenejercicio").setAttribute("src", "../vista/img/" + imagenes[4-auxSeries] + ".gif");
+          document.getElementById("imagenejercicio").setAttribute("src", "../vista/img/" + arrayEjerciciosPorSeries[4-auxSeries].nombreImagen);
+          document.getElementById("description").innerHTML = arrayEjerciciosPorSeries[4-auxSeries].description;
           audio2.play();
           aux2 = 0;
         }
@@ -129,6 +154,7 @@ function pancarta() {
         if(auxDescanso != 0){
           if(aux3 == 1){
             document.getElementById("imagenejercicio").setAttribute("src", "../vista/img/descanso.jpg");
+            document.getElementById("description").innerHTML = "Descansar";
             audio3.play();
             aux3 = 0;
           }
@@ -153,23 +179,19 @@ function pancarta() {
 }
 
 $("#verEjercicios").click(() => {
-  verEjerciciosGuardados();
-});
-
-function verEjerciciosGuardados() {
   $.ajax({
     type: "POST",
     url: "../controlador/accion/act_verEjerciciosGuardados.php",
     success: function (data) {
       let array = JSON.parse(data);
-      
-      array.forEach(function (object) {
-        objetoEjercicio = { nombreEjercicio: object.nombre, nombreImagen: object.imagen, idEjercicio: object.idEjercicio }
-        arrayEjerciciosPorSeries.push(objetoEjercicio)
-
+      array.forEach(function (object) {   
+        if(object.idTipoEjercicio == 4){
+          console.log(object)
+        }
       });
     },
   });
-  console.log(objetoEjercicio)
-}
+});
+
+
 

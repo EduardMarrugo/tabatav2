@@ -33,6 +33,10 @@
             // }
 
         }else{
-            //Si el usuario no existe se vuelve a mostrar el login
             header("Location: ../../vista/login.php");
+             echo '<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+            echo "<script>  
+           console.log('manco');</script>";
+            //Si el usuario no existe se vuelve a mostrar el login                
+            //
         }

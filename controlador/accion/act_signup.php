@@ -33,7 +33,7 @@ if ($_POST['nombre'] and $_POST['correo'] and $_POST['password'] and $_POST['tel
         $_SESSION['NOMBRE_USUARIO'] = $user_login->getNombre();
 
         if (isset($_SESSION['ID_USUARIO'])) {
-            header("Location: ../../vista/tabata.php");
+            header("Location: ../../vista/tabatas.php");
         } else {
             header("Location: ../../vista/login.php");
         }
